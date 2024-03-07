@@ -1,6 +1,3 @@
-"""
-work in progress
-"""
 import random
 
 class Cookie:

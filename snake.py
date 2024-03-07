@@ -125,7 +125,7 @@ class Snake:
         self.snake.append(self.lastTailPosition)
 
     def outOfBounds(self):
-
+        
         x,y = self.snake[0]
         if x == -1 or x == self.snakemapSize:
             return True

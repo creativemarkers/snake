@@ -62,6 +62,4 @@ class Map:
         x,y = cords
 
         self.mapCords[y][x] = "-"
-
-    #def deleteSnake():
             

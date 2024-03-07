@@ -19,13 +19,3 @@ class Input:
                 char = keyboard.read_event().name.lower()  # Read a keyboard event and get the name of the key
 
         return char
-
-    # # Example usage with a timeout of 5 seconds
-    # print("Press 'w', 'a', 's', or 'd' (or any other key to exit)...")
-    # timeout = 5  # Timeout in seconds
-    # char = get_input(timeout)
-
-    # if char is not None:
-    #     print("You pressed:", char)
-    # else:
-    #     print("Timeout reached. No key pressed.")
