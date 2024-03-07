@@ -8,8 +8,6 @@ class Map:
 
     emptyMapSpaceSymbol = "-"
 
-
-
     def __init__(self,size:int):
         self.size = size
         self.createMap()
@@ -32,7 +30,6 @@ class Map:
             print("")
         print("=================")
 
-
     def changeSymbol(self,y,x,symbol):
         #will prob change this to be print cookie
         self.mapCords[y][x] = symbol
@@ -45,6 +42,26 @@ class Map:
                 self.mapCords[y][x] = "O"
             else:
                 self.mapCords[y][x] = "S"
+
+    def printCookie(self, cords:tuple):
+        try:
+            x,y = cords
+
+            self.mapCords[y][x] = "*"
+        except IndexError:
+            print("Cookie tried spawning outside of map:", x, y)
+
+    def deleteSnake(self, snake:list):
+
+        for i in range(len(snake)):
+            x,y = snake[i]
+            self.mapCords[y][x] = "-"
+
+    
+    def deleteCookie(self, cords:tuple):
+        x,y = cords
+
+        self.mapCords[y][x] = "-"
 
     #def deleteSnake():
             

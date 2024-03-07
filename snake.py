@@ -1,7 +1,7 @@
 import random
 
 class Snake:
-
+    snakemapSize = None
     headSymbolUp = "^"
     headSymbolDown = ""
     headSymbolLeft = "<"
@@ -11,11 +11,14 @@ class Snake:
     lastDirection = None
     moveKey = ["w", "a", "s", "d"]
     potentialHeadCords = None
+    cookiesEaten = 0
+    lastTailPosition = (0,0)
 
     SNAKEHEAD = snake[0]
     
 
     def __init__(self, mapSize):
+        self.snakemapSize = mapSize
         #inorder to create a snake you need to give it the mapsize it will operate in to determine it's spawn location
         self.setSnakeStartingPosition(mapSize)
 
@@ -47,7 +50,7 @@ class Snake:
         """
         the function name is a bit of a lie does a bit more then just move the snake head, it moves the whole body
         """
-
+        oldSnake = self.snake
         #grabs the cords of the current position of the snake head to do calculations
         x,y = self.snake[0]
 
@@ -58,7 +61,7 @@ class Snake:
 
                 #changes body cords before we change the value of the head
                 self.moveSnakeBody()
-                #if user hs never input snake will stay still
+                #if user has never input snake will stay still
                 if self.lastDirection == "w":
                     self.snake[0] = (x,y-1)
                 elif self.lastDirection == "s":
@@ -83,10 +86,14 @@ class Snake:
                 self.moveSnakeBody()
                 self.snake[0] = self.potentialHeadCords
                 self.lastDirection = input
+
+        
             
     def moveSnakeBody(self):
         #moves the rest of the snake body to the cords of it's previous index, 
         #the for loop starts iterating from back to front and stop at index 1
+        self.lastTailPosition = self.snake[-1]
+
         for i in range(len(self.snake)-1, 0, -1):
             self.snake[i] = self.snake[i-1]
         
@@ -97,25 +104,31 @@ class Snake:
             return False
         else:
             return True
+        
+    def checkIfSnakeAteItself(self):
 
-
-
-
-    # def addToSnake(self):
-
-
-    # def checkIfTouchingBody(self):
-
-
-
-    # def addToSnake
-
-    # def drawSnake
-
-    # def isTouchingBody():      
-    #     for length of snake - minus the head
-    #         if head is touching body:
-    #             return True
-    #     return False
+        for i in range(1, len(self.snake)):
+            if self.snake[0] == self.snake[i]:
+                return True
+            
+        return False
     
+    def ateCookie(self, cookieCords:tuple):
+
+        if self.snake[0] == cookieCords:
+            self.cookiesEaten += 1
+            print("Cookie ate!")
+            return True
+        return False
     
+    def grow(self):
+        self.snake.append(self.lastTailPosition)
+
+    def outOfBounds(self):
+
+        x,y = self.snake[0]
+        if x == -1 or x == self.snakemapSize:
+            return True
+        elif y == -1 or y == self.snakemapSize:
+            return True
+        return False
