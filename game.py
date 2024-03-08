@@ -44,5 +44,8 @@ def main():
         time.sleep(0.05)
 
     print("GameOver, you ate %s cookies!" % snake.cookiesEaten)
+    
 
-main()
+if __name__ == "__main__":
+    main()
+    input("Press Enter to exit...")
